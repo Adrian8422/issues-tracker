@@ -1,0 +1,31 @@
+services:
+  mongodb:
+    image: mongo:5
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: issue_tracker
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongodb:27017/issue_tracker
+      - JWT_SECRET=your-secret-key
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
