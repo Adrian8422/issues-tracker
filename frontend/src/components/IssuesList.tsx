@@ -149,7 +149,6 @@ export const IssuesList = ({ refreshTrigger = 0, onIssueClick }: IssuesListProps
                     </span>
                   </div>
                 </div>
-                <p className="issue-description">{issue.description}</p>
                 <div className="issue-footer">
                   <small>Creado: {new Date(issue.createdAt).toLocaleDateString()}</small>
                 </div>
