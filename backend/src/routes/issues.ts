@@ -1,6 +1,7 @@
 import express from 'express';
 import Issue from '../models/Issue';
 import { authMiddleware, AuthRequest } from '../middleware/auth';
+import mongoose from 'mongoose';
 
 const router = express.Router();
 
@@ -61,6 +62,11 @@ router.post('/', async (req: AuthRequest, res) => {
 // GET /api/issues/:id - Get single issue
 router.get('/:id', async (req, res) => {
   try {
+    // Validar que el ID sea un ObjectId válido
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid issue ID' });
+    }
+
     const issue = await Issue.findById(req.params.id).populate('createdBy', 'email');
     if (!issue) return res.status(404).json({ error: 'Issue not found' });
     res.json(issue);
@@ -72,6 +78,10 @@ router.get('/:id', async (req, res) => {
 // PUT /api/issues/:id - Update issue
 router.put('/:id', async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid issue ID' });
+    }
+
     const issue = await Issue.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -88,6 +98,10 @@ router.put('/:id', async (req, res) => {
 // DELETE /api/issues/:id - Delete issue
 router.delete('/:id', async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid issue ID' });
+    }
+
     const issue = await Issue.findByIdAndDelete(req.params.id);
     if (!issue) return res.status(404).json({ error: 'Issue not found' });
     res.json({ message: 'Issue deleted successfully' });
