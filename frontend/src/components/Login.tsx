@@ -6,12 +6,25 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<{email?: string, password?: string}>({});
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setValidationErrors({});
+
+    // Validación básica
+    const errors: {email?: string, password?: string} = {};
+    if (!email.trim()) errors.email = 'Email es requerido';
+    if (!password.trim()) errors.password = 'Password es requerido';
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      setLoading(false);
+      return;
+    }
 
     try {
       await login({ email, password });
@@ -30,23 +43,25 @@ export const Login = () => {
         {error && <div className="error">{error}</div>}
         
         <div className="form-group">
-          <label>Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
+          {validationErrors.email && <div className="error">{validationErrors.email}</div>}
         </div>
         
         <div className="form-group">
-          <label>Contraseña:</label>
+          <label htmlFor="password">Contraseña:</label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
+          {validationErrors.password && <div className="error">{validationErrors.password}</div>}
         </div>
         
         <button type="submit" disabled={loading}>
