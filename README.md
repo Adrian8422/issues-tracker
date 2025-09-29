@@ -1,198 +1,123 @@
-# Issue Tracker App
+# 🎯 Issue Tracker App
 
-Una aplicación completa de seguimiento de incidencias con **React + TypeScript** (Frontend) y **Node.js + Express + MongoDB** (Backend).
+Aplicación de seguimiento de incidencias con **React + TypeScript** y **Node.js + Express + MongoDB**.
 
-## 🚀 Inicio Rápido
+---
 
-### Opción 1: Docker (Recomendado - Todo en uno)
+## ⚡ Ejecutar en 30 segundos
 
 ```bash
-# 1. Clonar el repositorio
-git clone <tu-repo>
-cd issue-tracker
+# 1. Clonar
+git clone https://github.com/Adrian8422/issues-tracker.git
+cd issues-tracker
 
-# 2. Levantar todos los servicios
+# 2. Levantar todo con Docker
 docker-compose up --build
 
-# 3. Crear datos de prueba (en otra terminal)
+# 3. Crear datos de prueba (nueva terminal)
 docker-compose exec backend npm run seed
-
-# 4. Abrir la aplicación
-# Frontend: http://localhost:3000
-# Backend API: http://localhost:3001
 ```
 
-### Opción 2: Desarrollo Local
+**✅ Listo!** 
+- **Frontend:** http://localhost:3000
+- **Backend:** http://localhost:3001
 
-#### Paso 1: Base de Datos
-```bash
-# Levantar solo MongoDB
-docker-compose up mongodb -d
-```
+---
 
-#### Paso 2: Backend
-```bash
-cd backend
-
-# Instalar dependencias
-npm install
-
-# Configurar variables de entorno
-cp .env.example .env
-
-# Crear datos de prueba
-npm run seed
-
-# Ejecutar en modo desarrollo
-npm run dev
-```
-
-#### Paso 3: Frontend
-```bash
-cd frontend
-
-# Instalar dependencias
-npm install
-
-# Ejecutar en modo desarrollo
-npm run dev
-```
-
-#### Paso 4: Abrir la aplicación
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:3001
-
-## 🔑 Credenciales de Prueba
+## � Login
 
 ```
 Email: admin@test.com
 Password: 123456
 ```
 
-## ✨ Características
+---
 
-- **Frontend**: React + TypeScript + Vite
-- **Backend**: Node.js + Express + TypeScript
-- **Base de datos**: MongoDB
-- **Autenticación**: JWT
-- **CRUD completo**: Crear, leer, actualizar y eliminar issues
-- **Filtros avanzados**: Por estado, prioridad y búsqueda de texto
-- **Paginación inteligente**: Navegación automática entre páginas
-- **Diseño responsive**: Funciona en móvil y desktop
-- **Notificaciones**: Confirmación de acciones
-
-## 📁 Estructura del Proyecto
-
-```
-issue-tracker/
-├── frontend/                # React + TypeScript
-│   ├── src/
-│   │   ├── components/      # Componentes reutilizables
-│   │   ├── pages/          # Páginas principales
-│   │   ├── services/       # Servicios API
-│   │   └── types/          # Tipos TypeScript
-│   └── package.json
-├── backend/                 # Node.js + Express
-│   ├── src/
-│   │   ├── models/         # Modelos MongoDB
-│   │   ├── routes/         # Rutas API
-│   │   ├── middleware/     # Middleware JWT
-│   │   └── scripts/        # Scripts de seed
-│   └── package.json
-├── docker-compose.yml       # Configuración Docker
-└── README.md
-```
-
-## 🛠️ Scripts Disponibles
-
-### Frontend
-```bash
-cd frontend
-npm run dev      # Desarrollo
-npm run build    # Compilar para producción
-npm run preview  # Vista previa de producción
-npm run lint     # Linter
-```
+## 🛠️ Sin Docker (Manual)
 
 ### Backend
 ```bash
 cd backend
-npm run dev      # Desarrollo con nodemon
-npm run build    # Compilar TypeScript
-npm start        # Producción
-npm run seed     # Crear datos de prueba
+npm install
+cp .env.example .env
+npm run seed
+npm run dev
 ```
 
-## 🌐 API Endpoints
-
-### Autenticación
-- `POST /api/auth/login` - Iniciar sesión
-
-### Issues
-- `GET /api/issues` - Listar issues (con filtros)
-- `POST /api/issues` - Crear issue
-- `GET /api/issues/:id` - Obtener issue específico
-- `PUT /api/issues/:id` - Actualizar issue
-- `DELETE /api/issues/:id` - Eliminar issue
-
-### Filtros disponibles
-```
-?page=1&limit=10&status=open&priority=high&search=texto
-```
-
-## 🐛 Solución de Problemas
-
-### "No se puede conectar al frontend"
+### Frontend
 ```bash
-# Verificar que el frontend esté corriendo en puerto 3000
-cd frontend && npm run dev
+cd frontend
+npm install
+npm run dev
 ```
 
-### "Error de autenticación"
+### MongoDB
 ```bash
-# Ejecutar el seed para crear el usuario de prueba
-cd backend && npm run seed
-```
-
-### "Error de conexión a MongoDB"
-```bash
-# Verificar que MongoDB esté corriendo
 docker-compose up mongodb -d
 ```
 
-### "Puerto ocupado"
-```bash
-# Cambiar puertos en docker-compose.yml si es necesario
-# Frontend: puerto 3000
-# Backend: puerto 3001
-# MongoDB: puerto 27017
-```
+---
 
-## 📝 Variables de Entorno
+## ✅ Funcionalidades
 
-Crear archivo `backend/.env`:
-
-```env
-NODE_ENV=development
-PORT=3001
-MONGODB_URI=mongodb://mongodb:27017/issue_tracker
-JWT_SECRET=your-super-secret-jwt-key-here
-```
-
-## ✅ Estado del Proyecto
-
-- [x] Backend API completa con TypeScript
-- [x] Frontend React + TypeScript
-- [x] Autenticación JWT
-- [x] CRUD completo de issues
-- [x] Filtros y paginación
-- [x] Modales y formularios
-- [x] Notificaciones de usuario
-- [x] Diseño responsive
-- [x] Docker setup completo
-- [ ] Tests unitarios (próximamente)
-- [ ] Tests de integración (próximamente)
+- ✅ **Login** con JWT
+- ✅ **CRUD Issues** (crear, ver, editar, eliminar)
+- ✅ **Filtros** por estado y prioridad
+- ✅ **Búsqueda** en título/descripción
+- ✅ **Paginación**
+- ✅ **Validaciones** y manejo de errores
+- ✅ **TypeScript** en frontend y backend
+- ✅ **Tests** automatizados
+- ✅ **Docker** setup completo
 
 ---
 
-**¿Necesitas ayuda?** Revisa la sección de solución de problemas o crea un issue en el repositorio.
+## 🧪 Tests
+
+```bash
+# Frontend
+cd frontend && npm test
+
+# Backend
+cd backend && npm test
+```
+
+---
+
+## 📋 API Endpoints
+
+```http
+POST /api/auth/login
+GET  /api/issues?page=1&limit=10&status=open&priority=high&search=bug
+POST /api/issues
+PUT  /api/issues/:id
+DELETE /api/issues/:id
+```
+
+---
+
+## 🐛 Problemas?
+
+```bash
+# Verificar servicios
+docker ps
+
+# Recrear todo
+docker-compose down
+docker-compose up --build
+
+# Datos de prueba
+docker-compose exec backend npm run seed
+```
+
+---
+
+## 📁 Estructura
+
+```
+├── backend/     # Node.js + Express + MongoDB
+├── frontend/    # React + TypeScript + Vite
+└── docker-compose.yml
+```
+
+**¡Eso es todo!** 🚀
